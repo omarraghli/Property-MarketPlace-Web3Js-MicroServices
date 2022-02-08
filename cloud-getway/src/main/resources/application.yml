@@ -1,0 +1,37 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATWAY
+  cloud:
+    gateway:
+      routes:
+      - id: AUTH-SERVICE
+        uri: lb://AUTH-SERVICE
+        predicates:
+        - Path=/connexion/**
+      - id: ADDPROPERTY-SERVICE
+        uri: lb://ADDPROPERTY-SERVICE
+        predicates:
+        - Path=/Property/**
+      - id: SAVECONTRAT-SERVICE
+        uri: lb://SAVECONTRAT-SERVICE
+        predicates:
+        - Path=/Contrat/**
+      - id: UPDATEACCOUNT-SERVICE
+        uri: lb://UPDATEACCOUNT-SERVICE
+        predicates:
+        - Path=/UpdateAccount/**
+     
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+   
